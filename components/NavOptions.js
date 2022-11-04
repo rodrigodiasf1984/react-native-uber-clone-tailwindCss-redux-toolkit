@@ -3,20 +3,23 @@ import React from 'react'
 import tw from 'twrnc'
 import { Icon } from '@rneui/themed'
 import { useNavigation } from '@react-navigation/native'
+// import { useSelector } from 'react-redux'
+// import { selectOrigin } from '../slices/navSlice'
 
 const NavOptions = () => {
   const navigation = useNavigation()
+  // const origin = useSelector(selectOrigin)
   const data = [
     {
       id: '123',
       title: 'Get a ride',
-      image: 'https://links.papareact.com/3pn',
+      image: require('../assets/uber_x.webp'),
       screen: 'MapScreen'
     },
     {
       id: '456',
       title: 'Order food',
-      image: 'https://links.papareact.com/28w',
+      image: require('../assets/uber_eats.png'),
       screen: 'EatsScreen'
     }
   ]
@@ -30,8 +33,9 @@ const NavOptions = () => {
         <TouchableOpacity
           onPress={() => navigation.navigate(item.screen)}
           style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40`}
+          // disabled={!origin}
         >
-          <View>
+          <View style={tw`$(!origin &&  opacity-20)`}>
             <Image
               source={{
                 uri: item.image
