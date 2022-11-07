@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler'
 import React from 'react'
-import { StyleSheet, StatusBar } from 'react-native'
+import { StatusBar, Platform, KeyboardAvoidingView } from 'react-native'
 import { Provider } from 'react-redux'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
@@ -20,29 +20,26 @@ export default function App() {
       <StatusBar barStyle='dark-content' backgroundColor={'white'} />
       <NavigationContainer>
         <SafeAreaProvider>
-          <Stack.Navigator>
-            <Stack.Screen
-              name='Home'
-              component={HomeScreen}
-              options={options}
-            />
-            <Stack.Screen
-              name='MapScreen'
-              component={MapScreen}
-              options={options}
-            />
-          </Stack.Navigator>
+          <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? -64 : 0}
+          >
+            <Stack.Navigator>
+              <Stack.Screen
+                name='Home'
+                component={HomeScreen}
+                options={options}
+              />
+              <Stack.Screen
+                name='MapScreen'
+                component={MapScreen}
+                options={options}
+              />
+            </Stack.Navigator>
+          </KeyboardAvoidingView>
         </SafeAreaProvider>
       </NavigationContainer>
     </Provider>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
