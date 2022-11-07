@@ -1,7 +1,8 @@
 import React from 'react'
-import { SafeAreaView, Text, Image, View } from 'react-native'
+import { SafeAreaView, Image, View } from 'react-native'
 import tw from 'twrnc'
 import NavOptions from '../components/NavOptions'
+import NavFavourites from '../components/NavFavourites'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import { GOOGLE_MAPS_APIKEY } from '@env'
 import UberLogo from '../assets/uber_logo.png'
@@ -49,6 +50,7 @@ const HomeScreen = () => {
           debounce={400}
         />
         <NavOptions />
+        <NavFavourites />
       </View>
     </SafeAreaView>
   )
