@@ -11,6 +11,8 @@ import {
 import tw from 'twrnc'
 import { Icon } from '@rneui/themed'
 import { useNavigation } from '@react-navigation/native'
+import { selectTravelTimeInformation } from '../slices/navSlice'
+import { useSelector } from 'react-redux'
 
 const data = [
   {
@@ -36,6 +38,10 @@ const data = [
 const RideOptionsCard = () => {
   const navigation = useNavigation()
   const [selected, setSelected] = useState(null)
+  const travelTimeInformation = useSelector(selectTravelTimeInformation)
+
+  const SURGE_CHARGE_RATE = 1.5
+
   return (
     <SafeAreaView style={tw`bg-white flex-1`}>
       <View>
@@ -45,7 +51,9 @@ const RideOptionsCard = () => {
         >
           <Icon name='chevron-left' type='fontawesome' />
         </TouchableOpacity>
-        <Text style={tw`text-center py-5 text-xl`}>Select a Ride</Text>
+        <Text style={tw`text-center py-5 text-xl`}>
+          Select a Ride - {travelTimeInformation?.distance?.text}
+        </Text>
       </View>
 
       <View style={{ flex: 1 }}>
@@ -57,7 +65,7 @@ const RideOptionsCard = () => {
             return (
               <TouchableOpacity
                 onPress={() => setSelected(item)}
-                style={tw`flex-row justify-between items-center px-10 ${
+                style={tw`flex-row justify-between items-center px-5 ${
                   item.id === selected?.id && 'bg-gray-200'
                 }`}
               >
@@ -71,19 +79,20 @@ const RideOptionsCard = () => {
                 />
                 <View style={tw`-ml-6`}>
                   <Text style={tw`text-xl font-semibold`}>{item.title}</Text>
-                  <Text>travel time</Text>
+                  <Text>
+                    {travelTimeInformation?.duration?.text} Travel time
+                  </Text>
                 </View>
                 <Text style={tw`text-xl`}>
-                  {/* {new Intl.NumberFormat('en-gb', {
+                  {new Intl.NumberFormat('en-gb', {
                     style: 'currency',
                     currency: 'EUR'
                   }).format(
                     (travelTimeInformation?.duration.value *
                       SURGE_CHARGE_RATE *
-                      multiplier) /
+                      item.multiplier) /
                       100
-                  )} */}
-                  $99
+                  )}
                 </Text>
               </TouchableOpacity>
             )
@@ -106,5 +115,3 @@ const RideOptionsCard = () => {
 }
 
 export default RideOptionsCard
-
-const styles = StyleSheet.create({})
