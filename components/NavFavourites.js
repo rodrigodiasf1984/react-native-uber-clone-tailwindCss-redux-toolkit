@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  View
-} from 'react-native'
+import { Text, TouchableOpacity, FlatList, View } from 'react-native'
 import React from 'react'
 import { Icon } from '@rneui/themed'
 import tw from 'twrnc'
@@ -23,12 +17,6 @@ const data = [
     destination: 'Lodon Eye, Lodon, UK'
   }
 ]
-
-const renderItem = (item) => (
-  <TouchableOpacity>
-    <Text>{item.name}</Text>
-  </TouchableOpacity>
-)
 
 const NavFavourites = () => {
   return (
@@ -56,5 +44,3 @@ const NavFavourites = () => {
 }
 
 export default NavFavourites
-
-const styles = StyleSheet.create({})
