@@ -8,6 +8,7 @@ import { GOOGLE_MAPS_APIKEY } from '@env'
 import UberLogo from '../assets/uber_logo.png'
 import { useDispatch } from 'react-redux'
 import { setDestination, setOrigin } from '../slices/navSlice'
+import { toInputBoxStyles } from '../components/commonStyles'
 
 const HomeScreen = () => {
   const dispatch = useDispatch()
@@ -21,14 +22,7 @@ const HomeScreen = () => {
 
         <GooglePlacesAutocomplete
           placeholder='Where From?'
-          styles={{
-            container: {
-              flex: 0
-            },
-            textInput: {
-              fontSize: 18
-            }
-          }}
+          styles={toInputBoxStyles}
           onPress={(data, details = null) => {
             dispatch(
               setOrigin({
