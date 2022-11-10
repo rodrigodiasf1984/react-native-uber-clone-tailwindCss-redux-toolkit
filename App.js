@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler'
 import React from 'react'
-import { StatusBar, Platform, KeyboardAvoidingView } from 'react-native'
+import { StatusBar, Platform, KeyboardAvoidingView, LogBox } from 'react-native'
 import { Provider } from 'react-redux'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
@@ -15,6 +15,7 @@ export default function App() {
   const options = {
     headerShown: false
   }
+  LogBox.ignoreAllLogs()
   return (
     <Provider store={store}>
       <StatusBar barStyle='dark-content' backgroundColor={'white'} />
@@ -27,7 +28,7 @@ export default function App() {
           >
             <Stack.Navigator>
               <Stack.Screen
-                name='Home'
+                name='HomeScreen'
                 component={HomeScreen}
                 options={options}
               />
