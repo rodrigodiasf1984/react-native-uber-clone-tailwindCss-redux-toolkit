@@ -3,12 +3,13 @@ import React from 'react'
 import tw from 'twrnc'
 import { Icon } from '@rneui/themed'
 import { useNavigation } from '@react-navigation/native'
-// import { useSelector } from 'react-redux'
-// import { selectOrigin } from '../slices/navSlice'
+import { useSelector } from 'react-redux'
+import { selectOrigin } from '../slices/navSlice'
 
 const NavOptions = () => {
   const navigation = useNavigation()
-  // const origin = useSelector(selectOrigin)
+  const origin = useSelector(selectOrigin)
+
   const data = [
     {
       id: '123',
@@ -33,21 +34,21 @@ const NavOptions = () => {
         <TouchableOpacity
           onPress={() => navigation.navigate(item.screen)}
           style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-100 m-2 w-40`}
-          // disabled={!origin}
+          disabled={!origin}
         >
-          {/* <View style={tw`$(!origin &&  opacity-20)`}> */}
-          <Image
-            source={item.image}
-            style={{ width: 120, height: 120, resizeMode: 'contain' }}
-          />
-          <Text style={tw`mt-2 text-lg font-semibold`}>{item.title}</Text>
-          <Icon
-            style={tw`p-2 bg-black rounded-full w-10 mt-4`}
-            name='arrowright'
-            color='white'
-            type='antdesign'
-          />
-          {/* </View> */}
+          <View style={tw`${!origin && 'opacity-20'}`}>
+            <Image
+              source={item.image}
+              style={{ width: 120, height: 120, resizeMode: 'contain' }}
+            />
+            <Text style={tw`mt-2 text-lg font-semibold`}>{item.title}</Text>
+            <Icon
+              style={tw`p-2 bg-black rounded-full w-10 mt-4`}
+              name='arrowright'
+              color='white'
+              type='antdesign'
+            />
+          </View>
         </TouchableOpacity>
       )}
     />
